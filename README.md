@@ -2,8 +2,9 @@ SigAnalyzer quickly analyzes scanning signatures and translates them into the ty
 
 To use, just download the .exe and double-click to open, then type in any signature obtained while scanning and hit Enter.
 <br><br>
-<div align="center"><img width="324" height="354" alt="image" src="https://github.com/user-attachments/assets/1c5efab5-c4b6-428b-b8ec-8aba2caecc06" />
-<img width="324" height="354" alt="image" src="https://github.com/user-attachments/assets/b557f161-88fe-45b5-9c8a-3f4eeddc59ce" /></div>
+<div align="center"><img width="324" height="384" alt="image" src="https://github.com/user-attachments/assets/2db61f99-5cdd-45a5-81d0-5be005bc3671" />
+<img width="325" height="385" alt="image" src="https://github.com/user-attachments/assets/cf36b3d4-5a12-4b09-8b75-ff90ab6f827c" />
+</div>
 <br>
 Note: It might throw a warning when you first launch it because I'm not paying Microsoft for a license. It doesnt pull any data from or interact with the game in any way, just references a self-contained database of values for ores and checks to see if any signatures entered are divisible by those values to return a number of rocks and ore type.
 <br><br><br><br>
