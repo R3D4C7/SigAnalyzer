@@ -1,21 +1,20 @@
 ScanCompanion quickly analyzes scanning signatures and translates them into the type of ore, rock quantity, and rarity hidden within distant signature clouds. It's nice because it makes it easier so you don't have to triple scan an area with more focused scans or fly closer to see what it is.
 To use, just download the .exe and double-click to open, then type in any signature obtained while scanning and hit Enter.
 <br><br>
-<b>To switch between the game and ScanCompanion, with Always On Top enabled, press the Backslash key \ and the cursor will move to the input box awaiting your input for a seamless transition. No tabbing out needed.</b>
+<b>To switch between the game and ScanCompanion, with Always On Top enabled, press the CapsLock key and the cursor will move to the input box awaiting your input for a seamless transition. No tabbing out needed.</b>
 <br><br>
-<div align="center"><img width="324" height="424" alt="image" src="https://github.com/user-attachments/assets/479526db-630d-4ee4-970b-2fb2204637dd" />
-<img width="324" height="424" alt="image" src="https://github.com/user-attachments/assets/34b6e8c7-7830-428e-8351-aea92116549d" />
-
+<div align="center"><img width="322" height="442" alt="lightmode" src="https://github.com/user-attachments/assets/0bf1c934-9c74-4a10-aa6d-4946f5b21ebe" />
+<img width="322" height="442" alt="lightmode2" src="https://github.com/user-attachments/assets/4bf23a81-0fa7-4655-9882-4fa81c7a9d1d" />
 <br>
   with Dark Mode and Always On Top options.
 <br>
-<img width="324" height="424" alt="image" src="https://github.com/user-attachments/assets/b04bee07-7be8-44ba-9cd0-ab64b15f2c58" />
-<img width="324" height="424" alt="image" src="https://github.com/user-attachments/assets/da5591d6-0757-47f5-9a6a-4b6e3a8820e0" />
+<img width="322" height="442" alt="darkmode" src="https://github.com/user-attachments/assets/44232c10-c44f-414a-9f20-d3889fb5bf99" />
+<img width="322" height="442" alt="darkmode2" src="https://github.com/user-attachments/assets/6e1cf84f-4b77-44cd-b507-028ca28b7772" />
 <br>
  and an opacity slider so you can have it up while playing without having to alt-tab out.
 <br>
-<img width="324" height="424" alt="image" src="https://github.com/user-attachments/assets/86375639-957b-46ea-9e57-fb77f3f08890" />
-<img width="324" height="424" alt="image" src="https://github.com/user-attachments/assets/b385fb7d-0951-4e5e-9d4e-4f2c2396c98e" />
+<img width="322" height="442" alt="opacity" src="https://github.com/user-attachments/assets/bce62f87-ea0e-4300-ad1b-9a223ed92c93" />
+<img width="322" height="442" alt="opacity2" src="https://github.com/user-attachments/assets/2280a017-5abc-43eb-9b13-a580b36cc6c8" />
 <br>
 Here's what that looks like.
 <br>
