@@ -51,25 +51,25 @@ MATERIALS = {
     4000: ("ROC Mineable", "COMMON"),
 }
 
+# Default Window Size Configuration
+BASE_WIDTH = 300
+BASE_HEIGHT = 440
+
 def focus_and_click_entry():
     """Moves the mouse to the center of the entry box, clicks it, and sets focus."""
     try:
         root.update_idletasks()
         
-        # Get absolute position and size of entry widget
         entry_x = entry.winfo_rootx()
         entry_y = entry.winfo_rooty()
         entry_w = entry.winfo_width()
         entry_h = entry.winfo_height()
 
-        # Calculate exact center point of the input box
         click_x = entry_x + (entry_w // 2)
         click_y = entry_y + (entry_h // 2)
 
-        # Move cursor and click inside entry box
         pyautogui.click(click_x, click_y)
         
-        # Ensure window and input box gain focus
         root.focus_force()
         entry.focus_set()
     except Exception as e:
@@ -82,7 +82,6 @@ def listen_for_caps_lock():
 def lookup_material(event=None):
     raw_input = entry.get().strip().lstrip("!")
     
-    # Clear the input field immediately
     entry.delete(0, tk.END)
     
     output_text.config(state="normal")
@@ -92,7 +91,6 @@ def lookup_material(event=None):
         value = int(raw_input)
         matches = []
 
-        # Find ALL matching items or multiplier matches
         for base_val, item in MATERIALS.items():
             if value == base_val:
                 matches.append((item, None))  # Exact match (1x)
@@ -104,17 +102,12 @@ def lookup_material(event=None):
             for idx, (item, multiplier) in enumerate(matches):
                 name, rarity = item
                 
-                # Insert newline before subsequent matches
                 if idx > 0:
                     output_text.insert(tk.END, "\n")
                 
-                # 1. Insert Material Name
                 output_text.insert(tk.END, f"{name} ")
-                
-                # 2. Insert colored square symbol for Rarity
                 output_text.insert(tk.END, "■", rarity)
                 
-                # 3. Insert Multiplier if applicable
                 if multiplier:
                     output_text.insert(tk.END, f" ({multiplier}x)")
         else:
@@ -128,8 +121,17 @@ def toggle_always_on_top():
     root.attributes("-topmost", always_on_top_var.get())
 
 def update_opacity(val):
-    # Scale ranges between 0.3 (30%) and 1.0 (100%)
     root.attributes("-alpha", float(val))
+
+def update_scale(val):
+    """Dynamically resizes the window while keeping top-left position standard."""
+    factor = float(val)
+    new_w = int(BASE_WIDTH * factor)
+    new_h = int(BASE_HEIGHT * factor)
+    
+    x = root.winfo_x()
+    y = root.winfo_y()
+    root.geometry(f"{new_w}x{new_h}+{x}+{y}")
 
 def toggle_dark_mode():
     is_dark = dark_mode_var.get()
@@ -146,16 +148,23 @@ def toggle_dark_mode():
     # Main window and frames
     root.config(bg=bg_color)
     main_container.config(bg=bg_color, highlightbackground=border_color)
+    header_frame.config(bg=bg_color)
     footer_frame.config(bg=bg_color)
     options_frame.config(bg=bg_color)
+    sliders_frame.config(bg=bg_color)
     opacity_frame.config(bg=bg_color)
+    scale_frame.config(bg=bg_color)
     legend_frame.config(bg=bg_color, fg=fg_color)
 
-    # Labels
+    # Labels & Title
     app_title_label.config(bg=bg_color, fg=fg_color)
     title_label.config(bg=bg_color, fg=fg_color)
     creator_label.config(bg=bg_color, fg=fg_color)
     opacity_label.config(bg=bg_color, fg=fg_color)
+    size_label.config(bg=bg_color, fg=fg_color)
+
+    # Close Button
+    close_btn.config(bg=bg_color, fg=fg_color, activebackground="#FF4D4D", activeforeground="#FFFFFF")
 
     # Inputs and Text Box
     entry.config(bg=input_bg, fg=fg_color, insertbackground=fg_color)
@@ -167,6 +176,7 @@ def toggle_dark_mode():
     dark_check.config(bg=bg_color, fg=fg_color, selectcolor=input_bg, activebackground=bg_color, activeforeground=fg_color)
     lock_check.config(bg=bg_color, fg=fg_color, selectcolor=input_bg, activebackground=bg_color, activeforeground=fg_color)
     opacity_scale.config(bg=bg_color, fg=fg_color, activebackground=bg_color, troughcolor=btn_bg)
+    size_scale.config(bg=bg_color, fg=fg_color, activebackground=bg_color, troughcolor=btn_bg)
 
     # Update Output Text Tags
     for rarity, color in colors_dict.items():
@@ -180,26 +190,28 @@ def toggle_dark_mode():
 
 def on_close():
     """Unbind hotkeys on exit to prevent leftover listeners."""
-    keyboard.unhook_all()
+    try:
+        keyboard.unhook_all()
+    except Exception:
+        pass
     root.destroy()
 
 # --- Drag Mechanics ---
 def start_drag(event):
     if lock_pos_var.get():
-        return  # Ignore drag initialization if locked
+        return
     root._drag_start_x = event.x_root - root.winfo_x()
     root._drag_start_y = event.y_root - root.winfo_y()
 
 def do_drag(event):
     if lock_pos_var.get():
-        return  # Ignore movement if locked
+        return
     x = event.x_root - root._drag_start_x
     y = event.y_root - root._drag_start_y
     root.geometry(f"+{x}+{y}")
 
 def bind_drag_events(widget):
     """Recursively binds drag events to background/label widgets."""
-    # Exclude interactive control widgets from dragging
     if not isinstance(widget, (tk.Entry, tk.Button, tk.Checkbutton, tk.Scale, tk.Text)):
         widget.bind("<Button-1>", start_drag)
         widget.bind("<B1-Motion>", do_drag)
@@ -210,10 +222,10 @@ def bind_drag_events(widget):
 root = tk.Tk()
 root.title("ScanCompanion")
 
-# --- Remove Title Bar & Window Controls ---
+# Remove Title Bar & Window Controls
 root.overrideredirect(True)
 
-root.geometry("320x440") # Slightly increased height to fit the new option cleanly
+root.geometry(f"{BASE_WIDTH}x{BASE_HEIGHT}")
 root.resizable(False, False)
 
 # --- Outer Border Container Frame ---
@@ -227,36 +239,56 @@ root.bind("\\", lambda e: focus_and_click_entry())
 hotkey_thread = threading.Thread(target=listen_for_caps_lock, daemon=True)
 hotkey_thread.start()
 
-# --- App Header Title ---
-app_title_label = tk.Label(main_container, text="ScanCompanion", font=("Arial", 14, "bold"), bg="#F0F0F0")
-app_title_label.pack(pady=(10, 2))
+# --- Header Section (App Title + Close Button) ---
+header_frame = tk.Frame(main_container, bg="#F0F0F0")
+header_frame.pack(fill="x", padx=5, pady=(4, 0))
 
-# --- Footer / Credit Section ---
-footer_frame = tk.Frame(main_container)
-footer_frame.pack(side="bottom", pady=(0, 3))
+app_title_label = tk.Label(header_frame, text="ScanCompanion", font=("Arial", 12, "bold"), bg="#F0F0F0")
+app_title_label.pack(side="left", padx=(5, 0))
 
-creator_label = tk.Label(footer_frame, text="Made by The Community.", font=("Arial", 8))
-creator_label.pack(side="left")
+close_btn = tk.Button(
+    header_frame,
+    text="✕",
+    font=("Arial", 10, "bold"),
+    bg="#F0F0F0",
+    fg="#000000",
+    bd=0,
+    padx=6,
+    pady=0,
+    activebackground="#FF4D4D",
+    activeforeground="#FFFFFF",
+    command=on_close,
+    cursor="hand2"
+)
+close_btn.pack(side="right")
 
-# --- Top and Center Widgets ---
-title_label = tk.Label(main_container, text="Enter signature value:", font=("Arial", 9, "bold"))
-title_label.pack(pady=(4, 4))
+# --- Footer Section (Trimmed Space) ---
+footer_frame = tk.Frame(main_container, bg="#F0F0F0")
+footer_frame.pack(side="bottom", pady=(0, 2))
 
-entry = tk.Entry(main_container, font=("Arial", 12), justify="center", width=20)
-entry.pack(pady=4)
+creator_label = tk.Label(footer_frame, text="Made by The Community.", font=("Arial", 7), bg="#F0F0F0")
+creator_label.pack()
+
+# --- Core Content Area ---
+title_label = tk.Label(main_container, text="Enter signature value:", font=("Arial", 8, "bold"))
+title_label.pack(pady=(2, 2))
+
+entry = tk.Entry(main_container, font=("Arial", 11), justify="center", width=18)
+entry.pack(pady=2)
 entry.bind("<Return>", lookup_material)
 
 btn = tk.Button(
     main_container,
     text="Search",
     command=lookup_material,
-    font=("Arial", 10),
+    font=("Arial", 9),
+    pady=1
 )
-btn.pack(pady=4)
+btn.pack(pady=2)
 
-# --- Options Options Area ---
+# --- Checkbox Controls Area ---
 options_frame = tk.Frame(main_container)
-options_frame.pack(pady=2)
+options_frame.pack(pady=1)
 
 always_on_top_var = tk.BooleanVar(value=False)
 ontop_check = tk.Checkbutton(
@@ -266,7 +298,7 @@ ontop_check = tk.Checkbutton(
     command=toggle_always_on_top,
     font=("Arial", 8)
 )
-ontop_check.grid(row=0, column=0, padx=5, pady=2)
+ontop_check.grid(row=0, column=0, padx=3, pady=0)
 
 dark_mode_var = tk.BooleanVar(value=False)
 dark_check = tk.Checkbutton(
@@ -276,7 +308,7 @@ dark_check = tk.Checkbutton(
     command=toggle_dark_mode,
     font=("Arial", 8)
 )
-dark_check.grid(row=0, column=1, padx=5, pady=2)
+dark_check.grid(row=0, column=1, padx=3, pady=0)
 
 lock_pos_var = tk.BooleanVar(value=False)
 lock_check = tk.Checkbutton(
@@ -285,14 +317,18 @@ lock_check = tk.Checkbutton(
     variable=lock_pos_var,
     font=("Arial", 8)
 )
-lock_check.grid(row=1, column=0, columnspan=2, pady=2)
+lock_check.grid(row=1, column=0, columnspan=2, pady=0)
 
-# --- Opacity Slider ---
-opacity_frame = tk.Frame(main_container)
-opacity_frame.pack(pady=(2, 4))
+# --- Combined Sliders Frame (Opacity & Size) ---
+sliders_frame = tk.Frame(main_container)
+sliders_frame.pack(pady=2)
+
+# Opacity Row
+opacity_frame = tk.Frame(sliders_frame)
+opacity_frame.pack(anchor="e", pady=1)
 
 opacity_label = tk.Label(opacity_frame, text="Opacity:", font=("Arial", 8))
-opacity_label.pack(side="left", padx=(0, 5))
+opacity_label.pack(side="left", padx=(0, 4))
 
 opacity_scale = tk.Scale(
     opacity_frame,
@@ -301,31 +337,54 @@ opacity_scale = tk.Scale(
     resolution=0.05,
     orient="horizontal",
     showvalue=False,
-    length=110,
-    width=10,
+    length=100,
+    width=8,
     command=update_opacity
 )
 opacity_scale.set(1.0)
 opacity_scale.pack(side="left")
 
+# Size Row
+scale_frame = tk.Frame(sliders_frame)
+scale_frame.pack(anchor="e", pady=1)
+
+size_label = tk.Label(scale_frame, text="Size:", font=("Arial", 8))
+size_label.pack(side="left", padx=(0, 4))
+
+size_scale = tk.Scale(
+    scale_frame,
+    from_=1.0,
+    to=0.7,
+    resolution=0.05,
+    orient="horizontal",
+    showvalue=False,
+    length=100,
+    width=8,
+    command=update_scale
+)
+size_scale.set(1.0)
+size_scale.pack(side="left")
+
+# Output Text Area
 output_text = tk.Text(
     main_container,
-    height=4,
-    width=25,
-    font=("Arial", 10, "bold"),
+    height=3,
+    width=24,
+    font=("Arial", 9, "bold"),
     wrap="word",
     relief="solid",
     bd=1,
 )
-output_text.pack(pady=(6, 10))
+output_text.pack(pady=(4, 4))
 
 for rarity, color in RARITY_COLORS_LIGHT.items():
     output_text.tag_config(rarity, foreground=color)
 
 output_text.config(state="disabled")
 
+# --- Rarity Legend Frame ---
 legend_frame = tk.LabelFrame(main_container, text=" Rarity Legend ", font=("Arial", 8, "bold"))
-legend_frame.pack(pady=(0, 6), padx=15)
+legend_frame.pack(pady=(0, 2), padx=10)
 
 legend_widgets = {}
 
@@ -334,13 +393,13 @@ for idx, (rarity, color) in enumerate(RARITY_COLORS_LIGHT.items()):
     col = idx % 3
     
     item_frame = tk.Frame(legend_frame)
-    item_frame.grid(row=row, column=col, padx=6, pady=2, sticky="w")
+    item_frame.grid(row=row, column=col, padx=4, pady=1, sticky="w")
     
-    sq_label = tk.Label(item_frame, text="■", fg=color, font=("Arial", 9, "bold"))
+    sq_label = tk.Label(item_frame, text="■", fg=color, font=("Arial", 8, "bold"))
     sq_label.pack(side="left")
     
-    txt_label = tk.Label(item_frame, text=rarity.title(), font=("Arial", 8))
-    txt_label.pack(side="left", padx=(2, 0))
+    txt_label = tk.Label(item_frame, text=rarity.title(), font=("Arial", 7))
+    txt_label.pack(side="left", padx=(1, 0))
 
     legend_widgets[rarity] = (item_frame, sq_label, txt_label)
 
