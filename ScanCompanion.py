@@ -180,7 +180,7 @@ def on_close():
 
 # Create GUI window
 root = tk.Tk()
-root.title("SigAnalyzer")
+root.title("ScanCompanion")
 root.geometry("320x390")
 root.resizable(False, False)
 root.protocol("WM_DELETE_WINDOW", on_close)
