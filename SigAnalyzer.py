@@ -96,6 +96,10 @@ def lookup_material(event=None):
 def toggle_always_on_top():
     root.attributes("-topmost", always_on_top_var.get())
 
+def update_opacity(val):
+    # Scale ranges between 0.3 (30%) and 1.0 (100%)
+    root.attributes("-alpha", float(val))
+
 def toggle_dark_mode():
     is_dark = dark_mode_var.get()
     
@@ -111,20 +115,23 @@ def toggle_dark_mode():
     root.config(bg=bg_color)
     footer_frame.config(bg=bg_color)
     options_frame.config(bg=bg_color)
+    opacity_frame.config(bg=bg_color)
     legend_frame.config(bg=bg_color, fg=fg_color)
 
     # Labels
     title_label.config(bg=bg_color, fg=fg_color)
     creator_label.config(bg=bg_color, fg=fg_color)
+    opacity_label.config(bg=bg_color, fg=fg_color)
 
     # Inputs and Text Box
     entry.config(bg=input_bg, fg=fg_color, insertbackground=fg_color)
     output_text.config(bg=input_bg, fg=fg_color)
 
-    # Buttons & Checkbuttons
+    # Buttons, Checkbuttons & Scale
     btn.config(bg=btn_bg, fg=fg_color, activebackground=active_btn_bg, activeforeground=fg_color)
     ontop_check.config(bg=bg_color, fg=fg_color, selectcolor=input_bg, activebackground=bg_color, activeforeground=fg_color)
     dark_check.config(bg=bg_color, fg=fg_color, selectcolor=input_bg, activebackground=bg_color, activeforeground=fg_color)
+    opacity_scale.config(bg=bg_color, fg=fg_color, activebackground=bg_color, troughcolor=btn_bg)
 
     # Update Output Text Tags
     for rarity, color in colors_dict.items():
@@ -139,7 +146,7 @@ def toggle_dark_mode():
 # Create GUI window
 root = tk.Tk()
 root.title("SigAnalyzer")
-root.geometry("320x350")
+root.geometry("320x390")
 root.resizable(False, False)
 
 # --- Footer / Credit Section (Packed FIRST to stick to bottom) ---
@@ -192,6 +199,27 @@ dark_check = tk.Checkbutton(
 )
 dark_check.pack(side="left", padx=5)
 
+# --- Opacity Slider (Center-aligned directly under the two checkbuttons) ---
+opacity_frame = tk.Frame(root)
+opacity_frame.pack(pady=(2, 4))
+
+opacity_label = tk.Label(opacity_frame, text="Opacity:", font=("Arial", 8))
+opacity_label.pack(side="left", padx=(0, 5))
+
+opacity_scale = tk.Scale(
+    opacity_frame,
+    from_=1.0,          # 100% Opacity
+    to=0.3,            # Minimum opacity capped at 30%
+    resolution=0.05,
+    orient="horizontal",
+    showvalue=False,   # Keep layout clean
+    length=110,
+    width=10,
+    command=update_opacity
+)
+opacity_scale.set(1.0)
+opacity_scale.pack(side="left")
+
 # Output Text Box
 output_text = tk.Text(
     root,
@@ -202,7 +230,7 @@ output_text = tk.Text(
     relief="solid",
     bd=1,
 )
-output_text.pack(pady=(6, 12))
+output_text.pack(pady=(6, 10))
 
 # Configure Text Tags for colors
 for rarity, color in RARITY_COLORS_LIGHT.items():
