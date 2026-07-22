@@ -7,7 +7,7 @@ To use, just download the .exe and double-click to open, then type in any signat
 
 
 
-
+Note: It might throw a warning when you first launch it because I'm not paying Microsoft for a license.
 <br><br><br><br>
 <sub>“This is an unofficial Star Citizen fan creation, not affiliated with the Cloud Imperium group of companies. All content on this site not authored by its host or users are property of their respective owners.”</sub>
 
