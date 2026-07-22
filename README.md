@@ -17,7 +17,7 @@ To use, just download the .exe and double-click to open, then type in any signat
 <img width="322" height="442" alt="opacity2" src="https://github.com/user-attachments/assets/2280a017-5abc-43eb-9b13-a580b36cc6c8" />
 <br>
 Here's what that looks like. Press Tab to use your scanners to scan. <br>
-You should see the scan signature at the top of the scanning HUD. Take that value and enter it into ScanCompanion.
+You should see the scan signature at the top of the scanning HUD. Take that value and hit capslock to enter it into ScanCompanion.
 <br>
 <img width="1920" height="1080" alt="Scan" src="https://github.com/user-attachments/assets/4908abad-4d25-47ca-a833-ceba42c7f880" />
 <br>ScanCompanion will show you which rocks are there so you don't have to fly up to each signature cloud you see and can keep moving until you find something you want to mine.<br>
