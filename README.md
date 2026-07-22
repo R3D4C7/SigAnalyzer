@@ -25,7 +25,7 @@ To switch between the game and SigAnalyzer, with Always On Top enabled, press th
 
 </div>
 <br>
-Note: It might throw a warning when you first launch it because I'm not paying Microsoft for a license. It doesnt pull any data from or interact with the game in any way, just references a self-contained database of values for ores and checks to see if any signatures entered are divisible by those values to return a number of rocks and ore type.
+Note: Windows might throw a warning when you first launch it because I'm not paying Microsoft for a license. It doesnt pull any data from or interact with the game in any way, just references a self-contained database of values for ores and checks to see if any signatures entered are divisible by those values to return a number of rocks and ore type.
 <br><br><br><br>
 <sub>“This is an unofficial Star Citizen fan creation, not affiliated with the Cloud Imperium group of companies. All content on this site not authored by its host or users are property of their respective owners.”</sub>
 
