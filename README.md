@@ -24,7 +24,7 @@ Here's what that looks like.
 <br><br><br>
 New to Star Citizen? Start playing today and use my referral code for a free 50,000UEC starting currency: https://robertsspaceindustries.com/enlist?referral=STAR-YCJJ-JSRG
 <br><br><br>
-Note: Windows might throw a warning when you first launch it because I'm not paying Microsoft for a license. It doesnt pull any data from or interact with the game in any way, just references a self-contained database of values for ores and checks to see if any signatures entered are divisible by those values to return a number of rocks and ore type.
+Note: Windows might throw a warning when you first launch ScanCompanion because I have not paid Microsoft for a license. It does not pull any data from or interact with the game in any way, it just references a self-contained database of values for ores and checks to see if any signatures entered are divisible by those values to return a number of rocks and ore type.
 <br><br><br><br>
 <sub>“This is an unofficial Star Citizen fan creation, not affiliated with the Cloud Imperium group of companies. All content on this site not authored by its host or users are property of their respective owners.”</sub>
 
