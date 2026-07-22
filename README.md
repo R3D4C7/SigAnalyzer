@@ -16,6 +16,7 @@ To use, just download the .exe and double-click to open, then type in any signat
 <img width="324" height="424" alt="image" src="https://github.com/user-attachments/assets/b385fb7d-0951-4e5e-9d4e-4f2c2396c98e" />
 <br>
 Here's what that looks like.
+<br>
 To switch between the game and SigAnalyzer, with Always On Top enabled, press the right-ctrl key and the cursor will move to the input box awaiting your signature input.
 <br>
 <img width="1920" height="1077" alt="image" src="https://github.com/user-attachments/assets/09197893-8c99-41ac-869e-918ce3dc8169" />
