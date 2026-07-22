@@ -1,5 +1,6 @@
 ScanCompanion quickly analyzes scanning signatures and translates them into the type of ore, rock quantity, and rarity hidden within distant signature clouds. It's nice because it makes it easier so you don't have to triple scan an area with more focused scans or fly closer to see what it is.
 To use, just download the .exe and double-click to open, then type in any signature obtained while scanning and hit Enter.
+To switch between the game and ScanCompanion, with Always On Top enabled, press the Backslash key (\) and the cursor will move to the input box awaiting your signature input for a seamless transition. No tabbing out needed.
 <br><br>
 <div align="center"><img width="324" height="424" alt="image" src="https://github.com/user-attachments/assets/479526db-630d-4ee4-970b-2fb2204637dd" />
 <img width="324" height="424" alt="image" src="https://github.com/user-attachments/assets/34b6e8c7-7830-428e-8351-aea92116549d" />
@@ -16,8 +17,6 @@ To use, just download the .exe and double-click to open, then type in any signat
 <img width="324" height="424" alt="image" src="https://github.com/user-attachments/assets/b385fb7d-0951-4e5e-9d4e-4f2c2396c98e" />
 <br>
 Here's what that looks like.
-<br>
-To switch between the game and ScanCompanion, with Always On Top enabled, press the Backslash key (\) and the cursor will move to the input box awaiting your signature input for a seamless transition. No tabbing out needed.
 <br>
 <img width="1920" height="1077" alt="image" src="https://github.com/user-attachments/assets/09197893-8c99-41ac-869e-918ce3dc8169" />
 </div>
