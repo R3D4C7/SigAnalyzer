@@ -75,9 +75,9 @@ def focus_and_click_entry():
     except Exception as e:
         print(f"Error focusing entry box: {e}")
 
-def listen_for_right_ctrl():
-    """Background thread to listen for Right Ctrl keypress globally."""
-    keyboard.add_hotkey("right ctrl", focus_and_click_entry)
+def listen_for_backslash():
+    """Background thread to listen for Backslash keypress globally."""
+    keyboard.add_hotkey("\\", focus_and_click_entry)
 
 def lookup_material(event=None):
     raw_input = entry.get().strip().lstrip("!")
@@ -115,8 +115,7 @@ def lookup_material(event=None):
                 output_text.insert(tk.END, "■", rarity)
                 
                 # 3. Insert Multiplier if applicable
-                if multiplier:
-                    output_text.insert(tk.END, f" ({multiplier}x)")
+                output_text.insert(tk.END, f" ({multiplier}x)")
         else:
             output_text.insert(tk.END, "Unknown")
     else:
@@ -188,11 +187,11 @@ root.protocol("WM_DELETE_WINDOW", on_close)
 
 # --- Focused Fallback Keybind ---
 # Works within Tkinter natively when window has focus
-root.bind("<Control_R>", lambda e: focus_and_click_entry())
+root.bind("\\", lambda e: focus_and_click_entry())
 
 # --- Global Hotkey Listener ---
-# Listens in a daemon thread so it catches Right Ctrl even when unfocused
-hotkey_thread = threading.Thread(target=listen_for_right_ctrl, daemon=True)
+# Listens in a daemon thread so it catches Backslash even when unfocused
+hotkey_thread = threading.Thread(target=listen_for_backslash, daemon=True)
 hotkey_thread.start()
 
 # --- Footer / Credit Section (Packed FIRST to stick to bottom) ---
