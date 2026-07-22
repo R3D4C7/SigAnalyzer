@@ -5,6 +5,8 @@ To use, just download the .exe and double-click to open, then type in any signat
 <div align="center"><img width="323" height="384" alt="image" src="https://github.com/user-attachments/assets/fdedb636-3dd2-4749-9347-f574d0e20b22" />
 <img width="324" height="384" alt="image" src="https://github.com/user-attachments/assets/75752169-b84a-4397-82fb-9f16e269a98f" />
 <br>
+  with Dark Mode and Always On Top settings.
+<br>
 <img width="324" height="384" alt="image" src="https://github.com/user-attachments/assets/2db61f99-5cdd-45a5-81d0-5be005bc3671" />
 <img width="325" height="385" alt="image" src="https://github.com/user-attachments/assets/cf36b3d4-5a12-4b09-8b75-ff90ab6f827c" />
 </div>
