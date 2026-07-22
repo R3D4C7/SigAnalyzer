@@ -1,4 +1,7 @@
 import tkinter as tk
+import pyautogui
+import keyboard
+import threading
 
 # Color mapping for each rarity tier
 RARITY_COLORS_LIGHT = {
@@ -47,6 +50,34 @@ MATERIALS = {
     3000: ("FPS Mineable", "COMMON"),
     4000: ("ROC Mineable", "COMMON"),
 }
+
+def focus_and_click_entry():
+    """Moves the mouse to the center of the entry box, clicks it, and sets focus."""
+    try:
+        root.update_idletasks()
+        
+        # Get absolute position and size of entry widget
+        entry_x = entry.winfo_rootx()
+        entry_y = entry.winfo_rooty()
+        entry_w = entry.winfo_width()
+        entry_h = entry.winfo_height()
+
+        # Calculate exact center point of the input box
+        click_x = entry_x + (entry_w // 2)
+        click_y = entry_y + (entry_h // 2)
+
+        # Move cursor and click inside entry box
+        pyautogui.click(click_x, click_y)
+        
+        # Ensure window and input box gain focus
+        root.focus_force()
+        entry.focus_set()
+    except Exception as e:
+        print(f"Error focusing entry box: {e}")
+
+def listen_for_right_ctrl():
+    """Background thread to listen for Right Ctrl keypress globally."""
+    keyboard.add_hotkey("right ctrl", focus_and_click_entry)
 
 def lookup_material(event=None):
     raw_input = entry.get().strip().lstrip("!")
@@ -143,11 +174,26 @@ def toggle_dark_mode():
         sq_label.config(bg=bg_color, fg=colors_dict[rarity])
         txt_label.config(bg=bg_color, fg=fg_color)
 
+def on_close():
+    """Unbind hotkeys on exit to prevent leftover listeners."""
+    keyboard.unhook_all()
+    root.destroy()
+
 # Create GUI window
 root = tk.Tk()
 root.title("SigAnalyzer")
 root.geometry("320x390")
 root.resizable(False, False)
+root.protocol("WM_DELETE_WINDOW", on_close)
+
+# --- Focused Fallback Keybind ---
+# Works within Tkinter natively when window has focus
+root.bind("<Control_R>", lambda e: focus_and_click_entry())
+
+# --- Global Hotkey Listener ---
+# Listens in a daemon thread so it catches Right Ctrl even when unfocused
+hotkey_thread = threading.Thread(target=listen_for_right_ctrl, daemon=True)
+hotkey_thread.start()
 
 # --- Footer / Credit Section (Packed FIRST to stick to bottom) ---
 footer_frame = tk.Frame(root)
@@ -157,7 +203,6 @@ creator_label = tk.Label(footer_frame, text="Made by the community.", font=("Ari
 creator_label.pack(side="left")
 
 # --- Top and Center Widgets ---
-
 # Input Field
 title_label = tk.Label(root, text="Enter signature value:", font=("Arial", 10, "bold"))
 title_label.pack(pady=(12, 4))
