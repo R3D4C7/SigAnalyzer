@@ -22,7 +22,7 @@ Here's what that looks like.
 <img width="1920" height="1077" alt="image" src="https://github.com/user-attachments/assets/09197893-8c99-41ac-869e-918ce3dc8169" />
 </div>
 <br><br><br>
-New to Star Citizen? Start playing today and use my referral code for a free 50,000UEC starting currency: [STAR-YCJJ-JSRG](https://robertsspaceindustries.com/enlist?referral=STAR-YCJJ-JSRG)
+New to Star Citizen? Start playing today and use my referral code for a free 50,000UEC starting currency: https://robertsspaceindustries.com/enlist?referral=STAR-YCJJ-JSRG
 <br><br><br>
 Note: Windows might throw a warning when you first launch it because I'm not paying Microsoft for a license. It doesnt pull any data from or interact with the game in any way, just references a self-contained database of values for ores and checks to see if any signatures entered are divisible by those values to return a number of rocks and ore type.
 <br><br><br><br>
