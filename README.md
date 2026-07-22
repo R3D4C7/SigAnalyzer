@@ -15,7 +15,10 @@ To use, just download the .exe and double-click to open, then type in any signat
 <br>
 <img width="324" height="424" alt="image" src="https://github.com/user-attachments/assets/86375639-957b-46ea-9e57-fb77f3f08890" />
 <img width="324" height="424" alt="image" src="https://github.com/user-attachments/assets/b385fb7d-0951-4e5e-9d4e-4f2c2396c98e" />
-<div><img width="1920" height="1077" alt="image" src="https://github.com/user-attachments/assets/09197893-8c99-41ac-869e-918ce3dc8169" />
+<br>
+Here's what that looks like.
+<br>
+<img width="1920" height="1077" alt="image" src="https://github.com/user-attachments/assets/09197893-8c99-41ac-869e-918ce3dc8169" />
 </div>
 
 
